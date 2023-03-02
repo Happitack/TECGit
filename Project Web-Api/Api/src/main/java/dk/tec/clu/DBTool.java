@@ -23,21 +23,6 @@ public class DBTool
 	        stmt = conn.createStatement();
 	    } catch (ClassNotFoundException | SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (stmt != null) {
-	                stmt.close();
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	        try {
-	            if (conn != null) {
-	                conn.close();
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
 	    }
 	}
 	
