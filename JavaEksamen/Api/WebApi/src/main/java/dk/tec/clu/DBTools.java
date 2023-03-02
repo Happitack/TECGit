@@ -40,15 +40,15 @@ public class DBTools
 			{
 				person = new Persons();
 				person.perID = result.getInt("PersonID");
-				//person.perName = result.getString("PersonName");
-				//person.perAddress = result.getString("elevPersonAddress");
-				//person.hairId = result.getInt("HairID");
-				//person.favorite = result.getBoolean("Favorite");
-				//person.personTlf = result.getString("PersonTlf");
-				//person.interest1 = result.getInt("Interest1");
-				//person.interest1 = result.getInt("Interest2");
-				//person.interest1 = result.getInt("Interest3");
-				//person.interest1 = result.getInt("Interest4");
+				person.perName = result.getString("PersonName");
+				person.perAddress = result.getString("elevPersonAddress");
+				person.hairId = result.getInt("HairID");
+				person.personTlf = result.getString("PersonTlf");
+				person.favorite = result.getBoolean("Favorite");
+				person.interest1 = result.getInt("Interest1");
+				person.interest1 = result.getInt("Interest2");
+				person.interest1 = result.getInt("Interest3");
+				person.interest1 = result.getInt("Interest4");
 			}
 			conn.close();
 			
