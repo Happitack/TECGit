@@ -13,23 +13,25 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView myTextView;
+    private TextView txtName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myTextView = (TextView) findViewById(R.id.myTextView);
+        txtName = (TextView) findViewById(R.id.idName);
+
 
         PersonService personService = ServiceBuilder.buildService(PersonService.class);
-        Call<Person> request = personService.getPersonById(1);
+        Call<Person> request = personService.getPersonById(2);
         request.enqueue(new Callback<Person>() {
             @Override
             public void onResponse(Call<Person> call, Response<Person> response) {
                 Person person = response.body();
-                String message = person.getPerName(); // assuming "getPerName()" returns the text you want to display
-                myTextView.setText(message);
+                String name = person.getPerName();
+                txtName.setText(name);
             }
 
             @Override
