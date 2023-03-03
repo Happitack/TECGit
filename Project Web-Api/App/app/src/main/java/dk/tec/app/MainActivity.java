@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myListView = findViewById(R.id.myListView);
-        myListAdapter = new MyListAdapter(this, new ArrayList<Person>());
+        myListAdapter = new MyListAdapter(this, new ArrayList<>());
         myListView.setAdapter(myListAdapter);
-        fetchData();
+        fetchDataGetID();
 
     }
 
-    private void fetchData() {
+    private void fetchDataGetAll() {
         // Create a new instance of your PersonService
         PersonService personService = ServiceBuilder.buildService(PersonService.class);
 
@@ -41,13 +41,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
                 // Update your adapter with the data received from the server
-                myListAdapter.updateData(response.body());
+                myListAdapter.updateDataGetAll(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Person>> call, Throwable t) {
                 // Handle errors here
             }
+        });
+    }
+
+    private void fetchDataGetID() {
+        // Create a new instance of your PersonService
+        PersonService personService = ServiceBuilder.buildService(PersonService.class);
+
+        // Make a request to fetch data from your Tomcat server
+        Call<Person> request = personService.getPersonById(1);
+        request.enqueue(new Callback<Person>() {
+            @Override
+            public void onResponse(Call<Person> call, Response<Person> response) {
+                // Update your adapter with the data received from the server
+                myListAdapter.updateDataGetID(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Person> call, Throwable t) {
+
+            }
+
         });
     }
 }

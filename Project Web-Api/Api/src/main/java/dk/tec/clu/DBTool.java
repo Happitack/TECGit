@@ -42,12 +42,12 @@ public class DBTool
 	            person.perName = result.getString("PersonName");
 	            person.perAddress = result.getString("PersonAddress");
 	            person.perPhone = result.getString("PhoneNumber");
-	            person.hairId = result.getInt("HairID");
+	            person.perHair = result.getString("HairColor");
 	            person.favorite = result.getBoolean("Favorite");
-	            person.interest1 = result.getInt("Interest1");
-	            person.interest2 = result.getInt("Interest2");
-	            person.interest3 = result.getInt("Interest3");
-	            person.interest4 = result.getInt("Interest4");
+	            person.interest1 = result.getString("Interest1");
+	            person.interest2 = result.getString("Interest2");
+	            person.interest3 = result.getString("Interest3");
+	            person.interest4 = result.getString("Interest4");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -76,12 +76,12 @@ public class DBTool
 	            person.perName = result.getString("PersonName");
 	            person.perAddress = result.getString("PersonAddress");
 	            person.perPhone = result.getString("PhoneNumber");
-	            person.hairId = result.getInt("HairID");
+	            person.perHair = result.getString("HairColor");
 	            person.favorite = result.getBoolean("Favorite");
-	            person.interest1 = result.getInt("Interest1");
-	            person.interest2 = result.getInt("Interest2");
-	            person.interest3 = result.getInt("Interest3");
-	            person.interest4 = result.getInt("Interest4");
+	            person.interest1 = result.getString("Interest1");
+	            person.interest2 = result.getString("Interest2");
+	            person.interest3 = result.getString("Interest3");
+	            person.interest4 = result.getString("Interest4");
 	            persons.add(person);
 	        }
 	    } catch (SQLException e) {
@@ -95,19 +95,19 @@ public class DBTool
 	
 	public void addPerson(Person person) throws SQLException {
 	    connect();
-	    String insertStr = "INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairID, Favorite, Interest1, Interest2, Interest3, Interest4) " +
+	    String insertStr = "INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairColor, Favorite, Interest1, Interest2, Interest3, Interest4) " +
 	                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    
 	    try (PreparedStatement pstmt = conn.prepareStatement(insertStr)) {
 	        pstmt.setString(1, person.perName);
 	        pstmt.setString(2, person.perAddress);
 	        pstmt.setString(3, person.perPhone);
-	        pstmt.setInt(4, person.hairId);
+	        pstmt.setString(4, person.perHair);
 	        pstmt.setBoolean(5, person.favorite);
-	        pstmt.setInt(6, person.interest1);
-	        pstmt.setInt(7, person.interest2);
-	        pstmt.setInt(8, person.interest3);
-	        pstmt.setInt(9, person.interest4);
+	        pstmt.setString(6, person.interest1);
+	        pstmt.setString(7, person.interest2);
+	        pstmt.setString(8, person.interest3);
+	        pstmt.setString(9, person.interest4);
 	        pstmt.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -118,18 +118,18 @@ public class DBTool
     
 	public void updatePerson(Person person) throws SQLException {
 	    connect();
-	    String updateStr = "UPDATE Persons SET PersonName = ?, PersonAddress = ?, PhoneNumber = ?, HairID = ?, Favorite = ?, Interest1 = ?, Interest2 = ?, Interest3 = ?, Interest4 = ? WHERE PersonID = ?";
+	    String updateStr = "UPDATE Persons SET PersonName = ?, PersonAddress = ?, PhoneNumber = ?, HairColor = ?, Favorite = ?, Interest1 = ?, Interest2 = ?, Interest3 = ?, Interest4 = ? WHERE PersonID = ?";
 	    
 	    try (PreparedStatement pstmt = conn.prepareStatement(updateStr)) {
 	        pstmt.setString(1, person.perName);
 	        pstmt.setString(2, person.perAddress);
 	        pstmt.setString(3, person.perPhone);
-	        pstmt.setInt(4, person.hairId);
+	        pstmt.setString(4, person.perHair);
 	        pstmt.setBoolean(5, person.favorite);
-	        pstmt.setInt(6, person.interest1);
-	        pstmt.setInt(7, person.interest2);
-	        pstmt.setInt(8, person.interest3);
-	        pstmt.setInt(9, person.interest4);
+	        pstmt.setString(6, person.interest1);
+	        pstmt.setString(7, person.interest2);
+	        pstmt.setString(8, person.interest3);
+	        pstmt.setString(9, person.interest4);
 	        pstmt.setInt(10, person.perID);
 	        pstmt.executeUpdate();
 	    } catch (SQLException e) {

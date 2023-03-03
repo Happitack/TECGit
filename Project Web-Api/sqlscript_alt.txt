@@ -1,0 +1,125 @@
+-- Setup of Persons table
+
+CREATE TABLE Persons (
+    PersonID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    PersonName varchar(255) NOT NULL,
+    PersonAddress varchar(255) NOT NULL,
+	PhoneNumber varchar(20) NOT NULL,
+	HairColor varchar(50),
+	Favorite bit,
+	Interest1 varchar(50),
+	Interest2 varchar(50),
+	Interest3 varchar(50),
+	Interest4 varchar(50)
+);
+
+GO
+
+-- Setup of Haircolors table
+--CREATE TABLE Haircolors (
+--    HairColID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--	HairColor varchar(20)
+--);
+
+--GO
+-- Setup of Interests table
+--CREATE TABLE Interests (
+--    IntrestID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--	Interests varchar(100)
+--);
+
+--GO
+
+ --Sets foreign key constraints on interests 1-4
+--ALTER TABLE Persons
+--	ADD CONSTRAINT [FK_Interest1] FOREIGN KEY (Interest1) REFERENCES Interests (IntrestID);
+--GO
+
+--ALTER TABLE Persons
+--	ADD CONSTRAINT [FK_Interest2] FOREIGN KEY (Interest2) REFERENCES Interests (IntrestID);
+--GO
+
+--ALTER TABLE Persons
+--	ADD CONSTRAINT [FK_Interest3] FOREIGN KEY (Interest3) REFERENCES Interests (IntrestID);
+--GO
+
+--ALTER TABLE Persons
+--	ADD CONSTRAINT [FK_Interest4] FOREIGN KEY (Interest4) REFERENCES Interests (IntrestID);
+--GO
+
+-- Adds data to Interests table
+--INSERT INTO Interests (Interests)
+--VALUES ('Java'),('C#'),('Python'),('C++');
+
+--GO
+
+---- Adds data to Haircolors table
+--INSERT INTO Haircolors (HairColor)
+--VALUES ('Blond'),('Black'),('Red'),('Brown'),('Grey');
+
+--GO
+
+-- Adds data to Persons table
+--
+-- Person 1
+INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairColor, Favorite, Interest1, Interest2) VALUES
+(('Jorn Tena'),
+('Cameroon Avenue 25'),
+('86312299'),
+('Blond'),
+(1),
+('Java'),
+('C#'));
+
+GO
+-- Person 2
+INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairColor, Favorite, Interest1, Interest2, Interest3) VALUES
+(('Bob Ronson'),
+('Camel Drive 11'),
+('86887125'),
+('Black'),
+(0),
+('Java'),
+('C#'),
+('Python'));
+
+GO
+
+-- Person 3
+INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairColor, Favorite, Interest1, Interest2) VALUES
+(('Christina Varru'),
+('Typhoon Street 55a'),
+('86995541'),
+('Red'),
+(0),
+('Python'),
+('C++'));
+
+GO
+
+-- Person 4
+INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairColor, Favorite, Interest1, Interest2, Interest3) VALUES
+(('Regina Thomson'),
+('Carrenbar Valley 2'),
+('86554415'),
+('Brown'),
+(1),
+('Python'),
+('C#'),
+('C++'));
+
+GO
+
+-- Person 5
+INSERT INTO Persons (PersonName, PersonAddress, PhoneNumber, HairColor, Favorite, Interest1, Interest2) VALUES
+(('Tom Barreston'),
+('Donkeyvale Street 23'),
+('86885541'),
+('Grey'),
+(0),
+('Java'),
+('Python'));
+
+Go
+
+--TRUNCATE TABLE Persons

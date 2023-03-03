@@ -19,10 +19,23 @@ public class MyListAdapter extends BaseAdapter {
         this.data = data;
     }
 
-    public void updateData(List<Person> newData) {
+    public void updateDataGetAll(List<Person> newData) {
+        if (newData == null) {
+            return;
+        }
         // Update the data and notify the adapter that the data has changed
         data.clear();
         data.addAll(newData);
+        notifyDataSetChanged();
+    }
+
+    public void updateDataGetID(Person newData) {
+        if (newData == null) {
+            return;
+        }
+        // Update the data and notify the adapter that the data has changed
+        data.clear();
+        data.add(newData);
         notifyDataSetChanged();
     }
 
@@ -63,11 +76,15 @@ public class MyListAdapter extends BaseAdapter {
         Person person = data.get(position);
 
         // Set the text of the TextViews to the values from the Person object
-        nameTextView.setText(person.getPerName());
-        addressTextView.setText(person.getPerAddress());
-        phoneTextView.setText(person.getPerPhone());
+        nameTextView.setText("Name: " + person.getPerName());
+        addressTextView.setText("Address: " +person.getPerAddress());
+        phoneTextView.setText("Phone: " +person.getPerPhone());
+        hairTextView.setText("Hair Color: " +person.getPerHair());
         favoriteCheckBox.setChecked(person.favorite);
         int1TextView.setText(person.getInterest1());
+        int2TextView.setText(person.getInterest2());
+        int3TextView.setText(person.getInterest3());
+        int4TextView.setText(person.getInterest4());
 
         // Return the inflated and updated list item layout
         return convertView;
