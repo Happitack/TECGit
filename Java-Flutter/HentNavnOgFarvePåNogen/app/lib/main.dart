@@ -73,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: resultColor,
+                border: InputBorder.none,
                 hintText: 'Result will be shown here',
               ),
             ),
