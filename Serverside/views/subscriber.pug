@@ -1,0 +1,16 @@
+extends templates/default
+
+block content
+    h1 Subscriber
+
+    table 
+        tr 
+            th ID
+            th Name
+            th Email
+
+        for item in data
+            tr 
+                td= item.id
+                td= item.name 
+                td= item.email  

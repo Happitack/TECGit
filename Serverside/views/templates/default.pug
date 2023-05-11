@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Server Page
+        link(rel="stylesheet", href="/css/style.css")
+    body
+
+        nav.nav-bar 
+            a(href="/").nav-item Home
+            a(href="/about").nav-item About
+            a(href="/subscriber").nav-item Subscriber
+
+        block content // this is where the content from the other pages will be injected

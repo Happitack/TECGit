@@ -1,0 +1,19 @@
+{
+  "test": [
+    {
+      "id": "1",
+      "name": "Jack Jackerie Jackson",
+      "email": "jjj@redneck-mail.usa"
+    },
+    {
+        "id": "2",
+        "name": "Johanna Tom",
+        "email": "jt@mail.com"
+    },
+    {
+        "id": "3",
+        "name": "Onka Wonka",
+        "email": "ow@ebatsu.com"
+    }
+    ]
+}

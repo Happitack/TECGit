@@ -1,0 +1,30 @@
+* { box-sizing: border-box; margin: 0; padding: 0;}
+.nav-bar {
+    background-color: #4b5d88;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+h1 {
+    background-color: orange;
+    color: white;
+}
+
+table {
+    justify-content: space-evenly;
+    display: flex;
+}
+
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
