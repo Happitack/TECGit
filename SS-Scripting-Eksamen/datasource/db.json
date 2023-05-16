@@ -1,11 +1,32 @@
 {
   "test": [
     {
-      "id": 1,
-      "fullname": "Brian Brianson",
-      "username": "BreeBree",
-      "email": "bb@email.com",
-      "tel": "1234567890"
+      "fullname": "Robin Christiansen",
+      "username": "RoboChris",
+      "email": "Robo@chris.dk",
+      "tel": "+45 58474128",
+      "id": 1
+    },
+    {
+      "fullname": "John Mikkelsen",
+      "username": "JoMek",
+      "email": "joemeek@mail.com",
+      "tel": "+45 12542145",
+      "id": 2
+    },
+    {
+      "fullname": "Christian Lüder",
+      "username": "cainrae",
+      "email": "cainrae@hotmail.com",
+      "tel": "+45 86911364",
+      "id": 3
+    },
+    {
+      "fullname": "Måchael Jøhansen",
+      "username": "MicJay",
+      "email": "MickyJ@coolguy.com",
+      "tel": "+45 55889911",
+      "id": 4
     }
   ]
 }

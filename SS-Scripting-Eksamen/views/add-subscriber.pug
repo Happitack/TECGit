@@ -6,10 +6,15 @@ block content
     .container
 
         form(action="#", method="post") 
-            input(type="text", name="fullname" placeholder="Indtast fulde navn")
-            input(type="text", name="username" placeholder="Indtast brugernavn" style="margin:8px auto")
-            input(type="text", name="email" placeholder="Indtast email" style="margin:8px auto")
-            input(type="text", name="tel" placeholder="Indtast telefonnummer" style="margin:8px auto")
+            input(type="text", name="fullname", placeholder="Indtast fulde navn", value=(inputData ? inputData.fullname : ''))
+            input(type="text", name="username", placeholder="Indtast brugernavn", value=(inputData ? inputData.username : ''), style="margin:8px auto")
+            input(type="text", name="email", placeholder="Indtast email", value=(inputData ? inputData.email : ''), style="margin:8px auto")
+            input(type="text", name="tel", placeholder="Indtast telefonnummer", value=(inputData ? inputData.tel : ''), style="margin:8px auto")
+
+            if errors
+                ul.errors
+                    each error in errors
+                        li= error
             a(href="/subscriber").btn-small Cancel
                 i.material-icons.left arrow_left 
             button(type="reset", style="margin:8px").btn-small Reset

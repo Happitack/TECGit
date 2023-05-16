@@ -10,28 +10,44 @@ router.get("/add", (req, res) => {
 });
 
 function isValidInput(input) {
-    
-    const rx = /^\w+@\w+\.\w{2,5}/
-    for (const [key, value] of Object.entries(input)) {
-        if (key === "email") {
-            const rxRes = rx.test(value);
-            if (!rxRes) {
-                return { error: true, msg: `Fejl i ${key}` }
-            }
-        }
-        if (value.length < 2) {
-            // return false;
-            return { error: true, msg: `Fejl i ${key}` }
+    const emailRx = /^\w+@\w+\.(com|dk|\w{2,5})$/;
+    const telRx = /^\+\d{1,3}\s\d{8,14}$/;
+    const nameRX = /^[\p{L}a-zA-ZÆØÅæøå]+( [\p{L}a-zA-ZÆØÅæøå]+)+$/;
+
+    let errors = [];
+
+    for (const [key, value] of Object.entries(input)) {9
+        switch (key) {
+            case "fullname":
+                if (!nameRX.test(value)) {
+                    errors.push(`Fulde navn skal være indholde mindst 5 tegn, og have et mellemrum mellem fornavn og efternavn`);
+                }
+                break;
+            case "username":
+                if (value.length < 3) {
+                    errors.push(`Brugernavn skal være mindst 3 tegn`);
+                }
+                break;
+            case "email":
+                if (!emailRx.test(value)) {
+                    errors.push(`Email er ikke gyldig`);
+                }
+                break;
+            case "tel":
+                if (value && !telRx.test(value)) {
+                    errors.push(`Telefonnummer er ikke gyldig. Skal indholde landekode og mellemrum mellem landekode og telefonnummer`);
+                }
+                break;
         }
     }
-    return {error: null}
+    return errors;
 }
 
 router.post("/add", async (req, res) => {
+    const validationErrors = isValidInput(req.body);
 
-    const validation = isValidInput(req.body);
-    if(validation.error) {
-        res.render("error", { err: validation.msg });
+    if(validationErrors.length > 0) {
+        res.render("add-subscriber", { errors: validationErrors, inputData: req.body });
         return;
     }
 
@@ -39,11 +55,10 @@ router.post("/add", async (req, res) => {
     if (data.err) {
         console.log(data.err);
         res.render("error", { err: data.err });
-    }
-    else {
+    } else {
         res.redirect("/subscriber");
     }
-})
+});
 
 router.get("/edit/:id", async (req, res) => {
     const id = req.params.id;
@@ -57,9 +72,22 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 router.post("/edit/:id", async (req, res) => {
+    const validationErrors = isValidInput(req.body);
+
+    if (validationErrors.length > 0) {
+        // re-render the edit-subscriber page with the error messages and the input data
+        res.render("edit-subscriber", { errors: validationErrors, data: req.body, id: req.params.id });
+        return;
+    }
+
     const data = await update(req, res);
-    res.redirect("/subscriber");
-})
+    if (data.err) {
+        console.log(data.err);
+        res.render("error", { err: data.err });
+    } else {
+        res.redirect("/subscriber");
+    }
+});
 
 router.get("/delete/:id", async (req, res) => {
     const id = req.params.id
