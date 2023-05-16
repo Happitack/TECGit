@@ -1,0 +1,19 @@
+extends templates/default
+
+block content
+    h1 Rediger 
+
+    .container 
+
+        form(action="", method="post") 
+            //- input(type="text" name="id" value=data.id hidden)
+            input(type="text", name="fullname" placeholder="Indtast fulde navn" value=data.fullname)
+            input(type="text", name="username" placeholder="Indtast brugernavn" value=data.username style="margin:8px auto")
+            input(type="text", name="email" placeholder="Indtast email" value=data.email style="margin:8px auto")
+            input(type="text", name="tel" placeholder="Indtast telefonnummer" value=data.tel style="margin:8px auto")
+            a(href="/subscriber").btn-small Cancel
+                i.material-icons.left arrow_left 
+            button(type="reset", style="margin:8px").btn-small Reset
+                i.material-icons.left cancel
+            button(type="submit").btn-small Gem
+                i.material-icons.left save

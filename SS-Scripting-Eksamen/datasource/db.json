@@ -1,0 +1,11 @@
+{
+  "test": [
+    {
+      "id": 1,
+      "fullname": "Brian Brianson",
+      "username": "BreeBree",
+      "email": "bb@email.com",
+      "tel": "1234567890"
+    }
+  ]
+}

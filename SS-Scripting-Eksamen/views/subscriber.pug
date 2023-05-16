@@ -1,0 +1,32 @@
+extends templates/default
+
+block content
+    h1 Subscriber
+
+    //- a(href="/subscriber/add") Tilføj 
+
+    .container
+
+        table 
+            caption 
+                a(href="/subscriber/add").btn-small.teal Tilføj
+                    i.material-icons.right add
+            tr 
+                th ID 
+                th Fullname 
+                th Username
+                th Mail
+                th Tel
+                th Action 
+            for item in data 
+                tr
+                    td= item.id 
+                    td= item.fullname 
+                    td= item.username
+                    td= item.email
+                    td= item.tel 
+                    td 
+                        a(href="/subscriber/delete/" + item.id onclick=`return confirm("Vil du slette ${item.id}: ${item.name}")`) 
+                            i.material-icons.red-text delete 
+                        a(href="/subscriber/edit/" + item.id)
+                            i.material-icons edit 
