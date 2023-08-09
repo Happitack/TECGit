@@ -1,0 +1,23 @@
+﻿@using CertificateEncryptionProj.Security;
+@page "/generatekeys"
+
+<h1>Generate Encryption Key and IV</h1>
+<button @onclick="Generate">Generate</button>
+@if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(iv))
+{
+    <div>
+        <p><strong>Key:</strong> @key</p>
+        <p><strong>IV:</strong> @iv</p>
+    </div>
+}
+
+@code {
+    private string key = "";
+    private string iv = "";
+
+    private void Generate()
+    {
+        KeyGenerator keyGenerator = new KeyGenerator();
+        (key, iv) = keyGenerator.GenerateKeyAndIV();
+    }
+}

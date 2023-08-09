@@ -1,0 +1,102 @@
+﻿@page "/todolist"
+@using CertificateEncryptionProj.Models
+@using CertificateEncryptionProj.Repo
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject TodoRepository TodoRepo
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<PageTitle>To-Do List</PageTitle>
+
+<h1>To-Do List</h1>
+
+<p>This component demonstrates managing a to-do list.</p>
+
+@if (todoItems == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <form @onsubmit="CreateTodoItemAsync">
+        <input @bind="newItem.Title" placeholder="Title" />
+        <input @bind="newItem.Description" placeholder="Description" />
+        <button type="submit">Add Item</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in todoItems)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>
+                        <button @onclick="() => UpdateTodoItemAsync(item)">Update</button>
+                        <button @onclick="() => DeleteTodoItemAsync(item.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    private List<ToDoItems>? todoItems;
+    private ToDoItems newItem = new ToDoItems();
+    private bool isAuthenticated;
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState?.User?.Identity?.IsAuthenticated != true)
+        {
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+            return;
+        }
+
+        await LoadTodoItemsAsync();
+    }
+
+    private async Task LoadTodoItemsAsync()
+    {
+        string userId = await GetUserIdAsync();
+        todoItems = (await TodoRepo.GetTodoItemsAsync(userId)).ToList();
+    }
+
+    private async Task<string> GetUserIdAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        return authState.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    }
+
+    private async Task CreateTodoItemAsync()
+    {
+        newItem.UserId = await GetUserIdAsync();
+        await TodoRepo.CreateTodoItemAsync(newItem);
+        newItem = new ToDoItems(); // Clear the form
+        await LoadTodoItemsAsync();
+    }
+
+    private async Task UpdateTodoItemAsync(ToDoItems item)
+    {
+        // Implement update logic here
+        await LoadTodoItemsAsync();
+    }
+
+    private async Task DeleteTodoItemAsync(int id)
+    {
+        await TodoRepo.DeleteTodoItemAsync(id);
+        await LoadTodoItemsAsync();
+    }
+}
