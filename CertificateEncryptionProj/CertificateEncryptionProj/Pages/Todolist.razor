@@ -75,60 +75,66 @@ else
 }
 @code {
 
-    private List<ToDoItems>? todoItems;
-    private ToDoItems newItem = new ToDoItems();
-    private bool isAuthenticated;
+    private List<ToDoItems>? todoItems; // The list of to-do items
+    private ToDoItems newItem = new ToDoItems(); // The new item to add
+    private bool isAuthenticated; // Whether the user is authenticated
 
-
+    // Called when component parameters are set, to check authentication and load to-do items
     protected override async Task OnParametersSetAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         if (authState?.User?.Identity?.IsAuthenticated != true)
         {
-            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true); // Redirect to login if not authenticated
             return;
         }
 
-        await LoadTodoItemsAsync();
+        await LoadTodoItemsAsync(); // Load to-do items if authenticated
     }
 
+    // Loads the to-do items for the authenticated user
     private async Task LoadTodoItemsAsync()
     {
-        string userId = await GetUserIdAsync();
-        todoItems = (await TodoRepo.GetTodoItemsAsync(userId)).ToList();
+        string userId = await GetUserIdAsync(); // Get the user's ID
+        todoItems = (await TodoRepo.GetTodoItemsAsync(userId)).ToList(); // Fetch the to-do items for the user
     }
 
+    // Retrieves the user ID from the authentication state
     private async Task<string> GetUserIdAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        return authState.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return authState.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Return the user's ID
     }
 
+    // Handles the creation of a new to-do item
     private async Task CreateTodoItemAsync()
     {
-        newItem.UserId = await GetUserIdAsync();
-        await TodoRepo.CreateTodoItemAsync(newItem);
+        newItem.UserId = await GetUserIdAsync(); // Set the user's ID on the new item
+        await TodoRepo.CreateTodoItemAsync(newItem); // Create the new item
         newItem = new ToDoItems(); // Clear the form
-        await LoadTodoItemsAsync();
+        await LoadTodoItemsAsync(); // Reload the to-do items
     }
 
+    // Enables editing mode for a specific to-do item
     private void StartEditing(ToDoItems item)
     {
-        item.IsEditing = true;
+        item.IsEditing = true; // Mark the item as being edited
     }
 
+    // Cancels editing mode for a specific to-do item
     private void CancelChanges(ToDoItems item)
     {
-        // If needed, reload the original values from the database
-        item.IsEditing = false;
+        item.IsEditing = false; // Mark the item as not being edited
     }
 
+    // Saves changes to a specific to-do item
     private async Task SaveChangesAsync(ToDoItems item)
     {
         await UpdateTodoItemAsync(item);
         item.IsEditing = false;
     }
 
+    // Updates a to-do item and reloads the list
     private async Task UpdateTodoItemAsync(ToDoItems item)
     {
         // Update the item using the repository
@@ -138,6 +144,7 @@ else
         await LoadTodoItemsAsync();
     }
 
+    // Deletes a to-do item by ID and reloads the list
     private async Task DeleteTodoItemAsync(int id)
     {
         await TodoRepo.DeleteTodoItemAsync(id);
