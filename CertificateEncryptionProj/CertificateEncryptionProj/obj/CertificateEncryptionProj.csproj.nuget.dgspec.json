@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chris\\source\\repos\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj": {}
+    "C:\\Users\\Tec\\Documents\\GitHub\\TECGit\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chris\\source\\repos\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj": {
+    "C:\\Users\\Tec\\Documents\\GitHub\\TECGit\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chris\\source\\repos\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj",
+        "projectUniqueName": "C:\\Users\\Tec\\Documents\\GitHub\\TECGit\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj",
         "projectName": "CertificateEncryptionProj",
-        "projectPath": "C:\\Users\\Chris\\source\\repos\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj",
-        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chris\\source\\repos\\CertificateEncryptionProj\\CertificateEncryptionProj\\obj\\",
+        "projectPath": "C:\\Users\\Tec\\Documents\\GitHub\\TECGit\\CertificateEncryptionProj\\CertificateEncryptionProj\\CertificateEncryptionProj.csproj",
+        "packagesPath": "C:\\Users\\Tec\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tec\\Documents\\GitHub\\TECGit\\CertificateEncryptionProj\\CertificateEncryptionProj\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tec\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -62,6 +64,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "MurmurHash-net-core": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -83,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

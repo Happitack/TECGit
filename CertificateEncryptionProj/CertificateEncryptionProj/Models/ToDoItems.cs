@@ -8,5 +8,9 @@
         public string Description { get; set; }
         public byte[] EncryptedTitle { get; set; }
         public byte[] EncryptedDescription { get; set; } 
+        public int TitleHash { get; set; }
+        public int DescriptionHash { get; set; }
+        public bool IsEditing { get; set; }
+
     }
 }

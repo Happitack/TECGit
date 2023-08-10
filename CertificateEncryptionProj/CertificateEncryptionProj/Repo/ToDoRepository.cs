@@ -2,10 +2,8 @@
 using CertificateEncryptionProj.Models;
 using CertificateEncryptionProj.Security;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Murmur;
+using System.Text;
 
 namespace CertificateEncryptionProj.Repo
 {
@@ -22,10 +20,24 @@ namespace CertificateEncryptionProj.Repo
 
         public async Task<ToDoItems> CreateTodoItemAsync(ToDoItems item)
         {
+            // Create an instance of MurmurHash
+            var murmur = MurmurHash.Create32();
+
+            // Hash the title and description
+            item.TitleHash = BitConverter.ToInt32(murmur.ComputeHash(Encoding.UTF8.GetBytes(item.Title)), 0);
+            item.DescriptionHash = BitConverter.ToInt32(murmur.ComputeHash(Encoding.UTF8.GetBytes(item.Description)), 0);
+
+            // Encrypt the title and description
             item.EncryptedTitle = _encryptionService.Encrypt(item.Title);
             item.EncryptedDescription = _encryptionService.Encrypt(item.Description);
+
+            // Add the item to the context
             _context.ToDoItems.Add(item);
+
+            // Save the changes to the database
             await _context.SaveChangesAsync();
+
+            // Return the newly created item
             return item;
         }
 
@@ -51,13 +63,35 @@ namespace CertificateEncryptionProj.Repo
             return item;
         }
 
+
         public async Task UpdateTodoItemAsync(ToDoItems item)
         {
-            item.EncryptedTitle = _encryptionService.Encrypt(item.Title);
-            item.EncryptedDescription = _encryptionService.Encrypt(item.Description);
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var existingItem = await _context.ToDoItems.FindAsync(item.Id);
+
+            // Create an instance of MurmurHash
+            var murmur = MurmurHash.Create32();
+
+            // Calculate the new hashes for title and description
+            int newTitleHash = BitConverter.ToInt32(murmur.ComputeHash(Encoding.UTF8.GetBytes(item.Title)), 0);
+            int newDescriptionHash = BitConverter.ToInt32(murmur.ComputeHash(Encoding.UTF8.GetBytes(item.Description)), 0);
+
+            // Check if the hashes are different
+            if (existingItem.TitleHash != newTitleHash || existingItem.DescriptionHash != newDescriptionHash)
+            {
+                // Update the encrypted fields
+                item.EncryptedTitle = _encryptionService.Encrypt(item.Title);
+                item.EncryptedDescription = _encryptionService.Encrypt(item.Description);
+
+                // Update the hash fields
+                item.TitleHash = newTitleHash;
+                item.DescriptionHash = newDescriptionHash;
+
+                // Update the entity in the database
+                _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
         }
+
 
         public async Task DeleteTodoItemAsync(int id)
         {
