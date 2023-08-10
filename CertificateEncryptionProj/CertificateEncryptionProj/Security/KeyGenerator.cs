@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 
 namespace CertificateEncryptionProj.Security
 {
+    // Generates a random key and IV for AES encryption
     public class KeyGenerator
     {
         public (string Key, string IV) GenerateKeyAndIV()
